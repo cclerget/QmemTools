@@ -68,15 +68,15 @@ if __name__ == "__main__":
 
     try:
         conn = httplib.HTTPConnection(param[0], param[1])
-    except Exception as e:
-        print "Unable to connect to %s:%s: %s" % (param[0], param[1], e.strerror)
+    except Exception:
+        print "Unable to connect to %s:%s" % (param[0], param[1])
         sys.exit(1)
 
     try:
         conn.request("GET", "/qhost")
         r = conn.getresponse()
-    except Exception as e:
-        print "Request have failed:", e.strerror
+    except Exception:
+        print "Request have failed"
         print "qmemserver is running ? url argument is wrong ?"
         sys.exit(1)
 
@@ -86,8 +86,8 @@ if __name__ == "__main__":
     try:
         conn.request("GET", "/qstat")
         r = conn.getresponse()
-    except Exception as e:
-        print "Request have failed:", e.strerror
+    except Exception:
+        print "Request have failed"
         print "qmemserver is running ? url argument is wrong ?"
         sys.exit(1)
 
