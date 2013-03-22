@@ -1,0 +1,22 @@
+#! /bin/sh
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
+
+case "$1" in
+  start)
+    echo "Starting qmemserver"
+	qmemserver.py start
+	;;
+  restart)
+    echo "Restarting qmemserver"
+    qmemserver.py restart
+	;;
+  stop)
+    echo "Stopping qmemserver"
+    qmemserver.py stop
+	;;
+  *)
+	echo "Usage: $0 start|stop|restart" >&2
+	exit 3
+	;;
+esac
