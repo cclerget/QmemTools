@@ -1,4 +1,11 @@
 #! /bin/sh
+#
+# qmemserver   Startup script for qmemserver.py
+#
+# chkconfig: - 85 15
+# description: qmemserver is a simple http server to generate and parse cached \
+#              xml data from qhost and qstat xml output command
+# processname: qmemserver.py
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
 
