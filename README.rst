@@ -4,11 +4,18 @@
 | QmemTools is a set of tools to monitor memory usage in an SGE cluster.
 | 
 | It will include more tools in the future but you can develop you own client
-| tools to fit your needs. Details about data structure returned in JSON server
-| are described below
+| tools to fit your needs. Details about data structure returned in JSON by the
+| server are described below
 |
-| **Note:** QmemTools has been tested on ubuntu, centos and redhat distribution.
+| **Note:** QmemTools has been tested on ubuntu, centos and redhat distributions.
 | QmemTools is compatible with POSIX system. Windows is not supported.
+
+How it works
+============
+| A daemon (qmemserver) generate and parse cached xml data from qhost and qstat
+| xml output command.
+| A client (ie: qmemview.py) request the server to receive JSON structured data
+| (refer to Data structure) and do something useful with it.
 
 Dependencies
 ============
