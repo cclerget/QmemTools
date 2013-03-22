@@ -29,6 +29,8 @@ shared = modules['__main__']
 # Be careful with check_timer value
 #
 def update_data():
+    qhost_xmldoc = ""
+    qstat_xmldoc = ""
     while(1):
         if file_generation == False:
             try:
@@ -185,7 +187,7 @@ if __name__ == "__main__":
             exit(1)
         pidfile = os.path.join(pid_directory, 'qmemserver.pid')
         logfile = os.path.join(log_directory, 'qmemserver.log')
-        qmemdaemon = QmemDaemon(pidfile=pidfile, logfile=logfile, uid=uid, gid=gid, debug=webdebug)
+        qmemdaemon = QmemDaemon(pidfile=pidfile, logfile=logfile, uid=uid, gid=gid)
         if argument == 'start':
             qmemdaemon.start()
         elif argument == 'stop':
