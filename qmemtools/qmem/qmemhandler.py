@@ -15,7 +15,7 @@ def qhost_handler(xmldoc):
     qhost_data = {}
     try:
         rss=libxml2.parseDoc(xmldoc)
-    except parserError:
+    except libxml2.parserError:
         return qhost_data
 
     ctxt = rss.xpathNewContext()
@@ -100,7 +100,7 @@ def qstat_handler(xmldoc, qhost_data, array_task):
     qstat_data = {}
     try:
         rss=libxml2.parseDoc(xmldoc)
-    except parserError:
+    except libxml2.parserError:
         return qstat_data
 
     ctxt = rss.xpathNewContext()
