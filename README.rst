@@ -73,6 +73,9 @@ Tools
     qmemview.py <url:port> -h <hostname> -j <jobid> : display only selected host with job details for jobid only
     <url:port> argument should be set to point on qmemserver address and port. ie: qmemview.py localhost:8080
 
+**TIPS,** for simplicity you can create a shell alias:
+    alias qmemview="qmemview.py localhost:8080"
+
 Data structure
 ==============
 
