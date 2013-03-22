@@ -9,7 +9,7 @@ class Daemon:
 
     Usage: subclass the Daemon class and override the run() method
     """
-    def __init__(self, pidfile, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', logfile='/var/log/qmemserver.log', uid=0, gid=0, debug=False):
+    def __init__(self, pidfile, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', logfile='/var/log/qmemserver.log', uid=0, gid=0):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -17,7 +17,6 @@ class Daemon:
         self.logfile = logfile
         self.uid = uid
         self.gid = gid
-        self.debug = debug
 	
     def daemonize(self):
         """
@@ -53,10 +52,10 @@ class Daemon:
         sys.stdout.flush()
         sys.stderr.flush()
         si = file(self.stdin, 'r')
-        if self.debug == True:
-            se = open(self.logfile,"a+")
-        else:
-            se = open("/dev/null","w")
+        if os.path.exists(self.logfile) == False:
+            fd = open(self.logfile,"w+")
+            fd.close()
+        se = open(self.logfile,"a+")
         so = file(self.stdout, 'a+')
         os.dup2(si.fileno(), sys.stdin.fileno())
         os.dup2(so.fileno(), sys.stdout.fileno())
@@ -70,9 +69,8 @@ class Daemon:
         # drop privileges
         os.chown(self.pidfile, self.uid, self.gid)
         os.chmod(self.pidfile, stat.S_IRUSR|stat.S_IWUSR|stat.S_IRGRP|stat.S_IWGRP|stat.S_IROTH)
-        if self.debug == True:
-            os.chown(self.logfile, self.uid, self.gid)
-            os.chmod(self.logfile, stat.S_IRUSR|stat.S_IWUSR|stat.S_IRGRP|stat.S_IWGRP|stat.S_IROTH)
+        os.chown(self.logfile, self.uid, self.gid)
+        os.chmod(self.logfile, stat.S_IRUSR|stat.S_IWUSR|stat.S_IRGRP|stat.S_IWGRP|stat.S_IROTH)
         os.setgid(self.gid)
         os.setegid(self.gid)
         os.setuid(self.uid)
