@@ -146,6 +146,8 @@ def qstat_handler(xmldoc, qhost_data, array_task):
                 if type(rn_max) is list and len(rn_max):
                     slots = int(rn_max[0].content)
     
+                minor_jobcount = False
+
                 for tasks in ctxt.xpathEval("JB_ja_tasks"):
                     ctxt.setContextNode(tasks)
                     # take the master
@@ -155,9 +157,11 @@ def qstat_handler(xmldoc, qhost_data, array_task):
                             maxvmem = ctxt.xpathEval("UA_value")[0].content
                             data = qhost_data[array_task["%s.1"%jobid]]['jobs'][jobid]
                             if data['jobcount'] != slots:
+                                minor_jobcount = True
                                 data['jobcount'] -= 1
                             qstat_data[owner]['jobs'][jobid]['hostname'].update({array_task["%s.1"%jobid]: {'master': maxvmem}})
-    
+
+                    index = 0    
                     ctxt.setContextNode(tasks)
 
                     for tasklist in ctxt.xpathEval("*/JAT_task_list"):
@@ -176,6 +180,9 @@ def qstat_handler(xmldoc, qhost_data, array_task):
                                 else:
                                     qstat_data[owner]['jobs'][jobid]['hostname'].update({hostname[index]: {'slave': maxvmem}})
                                 index += 1
+
+                    if minor_jobcount == False and slots > 1 and (data['jobcount']+index) != slots:
+                        data['jobcount'] -= 1
 
     rss.freeDoc()
     ctxt.xpathFreeContext()

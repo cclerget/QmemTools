@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
     p = re.compile('([0-9]+\.[0-9]+)([GgKkMmTt])')
 
-    header = "\033[1mHOSTNAME\tUSAGE\t\t\t\t\t\tPERCENTAGE\tMEMORY NEEDED\tMEMORY RESERVED\tTOTAL MEMORY\tAVAILABLE MEM\tSLOTS\033(B\033[m"
+    header = "\033[1mHOSTNAME\tUSAGE\t\t\t\t\t\tPERCENTAGE\tMEMORY NEEDED\tMEMORY USED    \tTOTAL MEMORY\tAVAILABLE MEM\tSLOTS\033(B\033[m"
     separator = "\t\t-------------------------------------------------------------------------------------------------------------------------------------\n"
 
     if user_switch == False:
@@ -249,7 +249,7 @@ if __name__ == "__main__":
                 print user_detail
 
     print ""
-    print "  \033[31m\033[1m#\033(B\033[m\033[0m Needed"
+    print "  \033[31m\033[1m#\033(B\033[m\033[0m Used"
     print "  \033[34m\033[1m#\033(B\033[m\033[0m Reserved"
     print "  \033[32m\033[1m#\033(B\033[m\033[0m Available"
     print ""
